@@ -12,7 +12,6 @@ const SideMenu = (props) => {
 
     const handleCreateMovie = (movie) => {
         createMovie(movie).then((movies) => {
-            console.log(JSON.stringify(movies));
             modal.closeModal();
             router.push('/')
         })

@@ -38,17 +38,17 @@ export const getMovies = () => {
 export const createMovie = (movie) => {
     movie.id = Math.random().toString().substr(2, 5);
     return axios.post(`${BASE_URL}/api/v1/movies`, movie).then(res => res.data);
-    // return new Promise((resolve, reject) => {
-    //     //Create movie ID for movie
-    //     movie.id = Math.random().toString(36).substr(2, 7);
-    //     MOVIE_DATA.push(movie);
-    //     setTimeout(() => {
-    //         resolve(MOVIE_DATA)
-    //         // reject('Cannot fetch data!')
-    //     }, 100);
-    // });
 };
 
 export const getMovieById = (id) => {
     return axios.get(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data)
+};
+
+export const updateMovie = (movie) => {
+    return axios.patch(`${BASE_URL}/api/v1/movies/${movie.id}`, movie)
+        .then(res => res.data)
+};
+
+export const deleteMovie = (id) => {
+    return axios.delete(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data)
 };
