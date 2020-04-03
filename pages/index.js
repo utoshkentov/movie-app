@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SideMenu from "../components/SideMenu";
 import Carousel from "../components/Carousel";
 import MovieList from "../components/MovieList";
@@ -6,8 +6,23 @@ import {getMovies, getCategories} from "../actions";
 
 
 const Home = (props) => {
-
     const {images, categories, movies} = props;
+    const [filter, setFilter] = useState('all');
+
+    const changeCategory = category => {
+        setFilter(category)
+    };
+
+    const filterMovies = movies => {
+        if (filter === 'all') {
+            return movies
+        }
+
+        return movies.filter((m) => {
+            return m.genre && m.genre.includes(filter)
+        })
+    };
+
     return (
         <div>
             <div className="home-page">
@@ -16,6 +31,8 @@ const Home = (props) => {
 
                         <div className="col-lg-3">
                             <SideMenu
+                                changeCategory={changeCategory}
+                                activeCategory={filter}
                                 categories={categories}
                                 appName={"Movie DB"}
                             />
@@ -23,8 +40,9 @@ const Home = (props) => {
 
                         <div className="col-lg-9">
                             <Carousel images={images}/>
+                            <h3>Displaying {filter} movies </h3>
                             <div className="row">
-                                <MovieList movies={movies || []}/>
+                                <MovieList movies={filterMovies(movies) || []}/>
                             </div>
                         </div>
 
