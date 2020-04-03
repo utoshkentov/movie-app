@@ -23,10 +23,10 @@ class MovieList extends Component {
                         <div className="card-body">
                             <h4 className="card-title">
                                 <Link href="/movies/[id]" as={`/movies/${movie.id}`}>
-                                    <a>{movie.name}</a>
+                                    <a >{movie.name}</a>
                                 </Link>
                             </h4>
-                            <h5>{movie.genre}</h5>
+                            <div className="movie-genre">{movie.genre}</div>
                             <p className="card-text">{this.shorten(movie.description, 100)}</p>
                         </div>
 
